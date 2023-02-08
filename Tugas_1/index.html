@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tugas 1 PAM - 120140073 - Jossy Raya Gopasda Saragih</title>
+</head>
+<body>
+    <div class="container">
+        <table class="tableMhs">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Nilai</th>
+                    <th>Huruf Mutu</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+        <script >
+            function loadData() {
+                fetch("https://63e33917619fce55d414fca7.mockapi.io/mahasiswa")
+                .then((response) => response.json())
+                .then((data) => {
+                let output = "";
+                let no = 1;
+                let tr;
+                let nilaiMutu = '';
+                data.forEach((mhs) => {
+                    nama = `${mhs.name}`;
+                    nim = `${mhs.nim}`;
+                    nilai = `${mhs.nilai}`;
+                    nilai = parseInt(`${nilai}`);
+                    console.log(nilai)
+                        if (nilai >= 80) {
+                            nilaiMutu = "A";
+                        } else if (nilai >= 70 && nilai < 80) {
+                            nilaiMutu = "AB";
+                        } else if (nilai >= 60 && nilai < 70) {
+                            nilaiMutu = "B";
+                        } else if (nilai >= 50 && nilai < 60) {
+                            nilaiMutu = "BC";
+                        } else if (nilai >= 40 && nilai < 50) {
+                            nilaiMutu = "C";
+                        } else if (nilai >= 10 && nilai < 40) {
+                            nilaiMutu = "D";
+                        } else if (nilai < 10) {
+                            nilaiMutu = "E";
+                        } 
+                    output +=
+                    `<tr>
+                        <td>` +
+                    no++ +
+                    `</td>
+                        <td>${mhs.name}</td>
+                        <td>${mhs.nim}</td>
+                        <td>${mhs.nilai}</td>
+                         <td>${nilaiMutu}</td>
+                        
+                    </tr>`;
+                     
+                });
+                document.querySelector("tbody").innerHTML = output;
+                });
+            }
+        loadData();
+        </script>
+</body>
+</html>
